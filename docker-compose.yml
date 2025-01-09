@@ -1,0 +1,30 @@
+version: '3.8'
+
+services:
+  app:
+    image: your-mind-health
+    container_name: your-mind-health
+    ports:
+      - "8080:8080"
+    depends_on:
+      - mysql
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:mysql://mysql:3306/ymh
+      SPRING_DATASOURCE_USERNAME: ymh
+      SPRING_DATASOURCE_PASSWORD: ymh
+
+  mysql:
+    image: mysql:8.1
+    container_name: mysql-container
+    ports:
+      - "3306:3306"
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: ymh
+      MYSQL_USER: ymh
+      MYSQL_PASSWORD: ymh
+    volumes:
+      - mysql-data:/var/lib/mysql
+
+volumes:
+  mysql-data:
